@@ -1,38 +1,32 @@
 #include<bits/stdc++.h>
 using namespace std;
-int n;
-int a[3005];
-int dp[3005][3005];
-int ans=-1;
+long long n;
+long long a[3005];
+long long dp[3005][3005];
+long long ans=-1;
 int main()
 {
     cin>>n;
-    for(int i=1;i<=n;i++)
+    for(long long i=1;i<=n;i++)
     {
         cin>>a[i];
     }
-    for(int len=1;len<=n;len++)
+    for(long long len=1;len<=n;len++)
     {
-        for(int i=1;i<=n+len-1;i++)
+        for(long long i=1;i+len-1<=n;i++)
         {
-            int j=len+i-1;
-            if(len%2==0)
+            long long j=len+i-1;
+            if((n-len)%2==0)
             {
                 // 先 x
-                dp[i][j]=max(dp[i][j]+a[i],dp[i][j]+a[j]);
+                dp[i][j]=max(dp[i+1][j]+a[i],dp[i][j-1]+a[j]);
             }
             else{
                 // 后 y
-                dp[i][j]=min(dp[i][j]-a[i],dp[i][j]-a[j]);
+                dp[i][j]=min(dp[i+1][j]-a[i],dp[i][j-1]-a[j]);
             }
         }
     } 
-    for(int i=1;i<=n;i++)
-    {
-        for(int j=1;j<=n;j++)
-        {
-            ans=max(dp[i][j],ans);
-        }
-    }
+    cout<<dp[1][n];
     return 0;
 }
