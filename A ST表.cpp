@@ -1,0 +1,44 @@
+#include<bits/stdc++.h>
+using namespace std;
+int st[100005][20];
+int n,m,l,r;
+int a[100005];
+int s[25];
+// inline int read()
+// {
+// 	int x=0,f=1;char ch=getchar();
+// 	while (ch<'0'||ch>'9'){if (ch=='-') f=-1;ch=getchar();}
+// 	while (ch>='0'&&ch<='9'){x=x*10+ch-48;ch=getchar();}
+// 	return x*f;
+// }
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    cin>>n>>m;
+    for(int i=1;i<=n;i++)
+    {
+        cin>>a[i];
+        st[i][0]=a[i];
+    }
+    s[0]=1;
+    for(int i=1;i<=20;i++){
+        s[i]=s[i-1]*2;
+    }
+    int kkk=log2(n);
+    for(int i=1;i<=kkk;i++)
+    {
+        for(int j=1;j+s[i]-1<=n;j++)
+        {
+            st[j][i]=max(st[j][i-1],st[j+s[i-1]][i-1]);
+        }
+    }
+    for(int i=1;i<=m;i++)
+    {
+        cin>>l>>r;
+        int k=log2(r-l+1);
+        cout<<max(st[l][k],st[r-s[k]+1][k])<<"\n";
+    }
+    return 0;
+}
