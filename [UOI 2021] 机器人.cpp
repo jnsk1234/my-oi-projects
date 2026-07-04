@@ -1,10 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
-int st[62][100005];
-int n,m,l,r,t;
-int a[100005];
-int s[25];
-int cnt[100005];
+int st[62][1000005];
+long long n,m,l,r,t;
+long long cnt[1000005];
 char ch;
 int main()
 {
@@ -12,32 +10,38 @@ int main()
     cin.tie(0);
     cout.tie(0);
     cin>>n;
-    for(int i=1;i<=n;i++)
+    for(long long i=1;i<=n;i++)
     {
         cin>>ch;
         if(ch=='L')
         {
-            st[0][i]=-1;
+            st[0][i]=i-1;
         }else{
-            st[0][i]=1;
+            st[0][i]=1+i;
         }
-            
     }
     cin>>t;
-    int kkk=log2(t);
-    for(int i=1;i<=kkk;i++)
+    long long kkk=log2(t);
+    for(long long i=1;i<=kkk;i++)
     {
-        for(int j=1;j+pow(2,i)-1<=n;j++)
+        for(long long j=1;j<=n;j++)
         {
-            int f=j+pow(2,i);
-            st[i][j]=max(st[i-1][j],st[i-1][f]);
+            st[i][j]=st[i-1][st[i-1][j]];
         }
     }
-    for(int i=1;i<=n;i++)
+    for(long long i=1;i<=n;i++)
     {
-        cnt[i+st[kkk][i]]++;
+        long long x=i;
+        for(long long j=0;j<=62;j++)
+        {
+            if(t&(1ll<<j))
+            { 
+                x=st[j][x];
+            }
+        }
+        cnt[x]++;
     }
-    for(int i=1;i<=n;i++)
+    for(long long i=1;i<=n;i++)
     {
         cout<<cnt[i]<<' ';
     }
