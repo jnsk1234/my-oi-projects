@@ -14,13 +14,7 @@ inline void dfs(long long x,long long faa)
             continue;
         }
         fa[i]=x;
-        if(faa!=-1)
-        {
-            dis[i]=dis[fa[i]]+1;
-        }
-        else{
-            dis[i]=1;
-        }
+        dis[i]=dis[fa[i]]+1;
         dfs(i,x);
     }
 }
@@ -42,7 +36,7 @@ inline void LCA(int x,int y)
     }
     for(int i=k;i>=0;i--)
     {
-        if(st[y][i]!=st[x][i]);
+        if(st[y][i]!=st[x][i])
         {
             y=st[y][i];
             x=st[x][i];
@@ -52,6 +46,9 @@ inline void LCA(int x,int y)
 }
 int main()
 {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
     cin>>n>>m>>s;
     for(int i=1;i<=n-1;i++)
     {
@@ -59,7 +56,8 @@ int main()
         a[u].push_back(v);
         a[v].push_back(u);
     }
-    dfs(s,-1);
+    dis[s]=1;
+    dfs(s,0);
     for(int i=1;i<=n;i++)
     {
         st[i][0]=fa[i];
@@ -68,7 +66,7 @@ int main()
     {
         for(int j=1;j<=n;j++)
         {
-            st[i][j]=st[st[i][j-1]][j-1];
+            st[j][i]=st[st[j][i-1]][i-1];
         }
     }
     for(int i=1;i<=m;i++)

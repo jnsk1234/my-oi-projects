@@ -1,27 +1,28 @@
 #include<bits/stdc++.h>
 using namespace std;
-int a[200005];
-int tree1[200005];
-int tree2[200005];
-int n,m,op,l,r,k;
-inline int lowbit(int x)
+long long a[200005];
+long long tree1[200005];
+long long tree2[200005];
+long long n,m,op,l,r,k;
+inline long long lowbit(long long x)
 {
     return (-x)&x;
 }
-inline int qzh(int l);
+inline long long qzh(long long l)
 {
-    int ans=0,ans1=0;
-    for(int i=l;i>=1;i-=lowbit(i))
+    // 我一想到我要连续不断的上1个月辅导班我就不行了
+    long long ans=0,ans1=0;
+    for(long long i=l;i>=1;i-=lowbit(i))
     {
         ans+=tree1[i];
         ans1+=tree2[i];
     }
     return ans1*(l+1)-ans;
 }
-inline int hzh(int l,int k)
+inline void hzh(long long l,long long k)
 {
-    int k1=l*k;
-    for(int i=l;i<=n;i+=lowbit(i))
+    long long k1=l*k;
+    for(long long i=l;i<=n;i+=lowbit(i))
     {
         tree1[i]+=k1;
         tree2[i]+=k;
@@ -29,13 +30,16 @@ inline int hzh(int l,int k)
 }
 int main()
 {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
     cin>>n>>m;
-    for(int i=1;i<=n;i++)
+    for(long long i=1;i<=n;i++)
     {
         cin>>a[i];
         hzh(i,a[i]-a[i-1]);
     }
-    for(int i=1;i<=m;i++)
+    for(long long i=1;i<=m;i++)
     {
         cin>>op;
         if(op==1)
@@ -56,7 +60,15 @@ int main()
             hzh(1,-k);
             hzh(2,k);
         }
-        if()
+        if(op==4)
+        {
+            cin>>l>>r;
+            cout<<qzh(r)-qzh(l-1)<<"\n";
+        }
+        if(op==5)
+        {
+            cout<<qzh(1)<<"\n";
+        }
     }
     
 
