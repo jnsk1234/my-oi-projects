@@ -2,7 +2,7 @@
 using namespace std;
 int net[1000005];
 string s1, s2;
-set<int >a;
+set<int> a;
 void scnet()
 {
     int len = 0;
@@ -24,7 +24,7 @@ void scnet()
             }
             else
             {
-                len = net[len-1];
+                len = net[len - 1];
             }
         }
     }
@@ -53,7 +53,7 @@ void kmp()
         }
         if (j == s2.size())
         {
-            a.insert(i - j + 1) ;
+            a.insert(i - j + 1);
         }
     }
 }
@@ -62,13 +62,13 @@ int main()
     cin >> s1 >> s2;
     scnet();
     kmp();
-    for(int i:a)
+    for (int i : a)
     {
-        cout<<i<<"\n";
+        cout << i << "\n";
     }
-    for(int i=0;i<s2.size();i++)
+    for (int i = 0; i < s2.size(); i++)
     {
-        cout<<net[i]<<" ";
+        cout << net[i] << " ";
     }
     return 0;
 }

@@ -49,10 +49,12 @@ int main()
     {
         dp[1]+=dep[i];
     }
+    cout<<dp[1];
     dfs1(1,-1);
      for(long long i=1;i<=n;i++)
     {
-        mx=max(dp[i],mx);
+        // mx=max(dp[i],mx);
+        cout<<dp[i]<<' ';
     }
      for(long long i=1;i<=n;i++)
     {

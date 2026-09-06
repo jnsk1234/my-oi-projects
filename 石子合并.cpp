@@ -13,10 +13,6 @@ int main()
         cin>>m[i];
         s[i]=m[i]+s[i-1];
     }
-    // for(int i=1;i<=n;i++)
-    // {
-    //     cout<<s[i]<<' ';
-    // }
     for(int i=1;i<=n;i++)
     {
         for(int j=1;j<=n;j++)
